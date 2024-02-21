@@ -5,7 +5,7 @@ import json from 'body-parser';
 import path from 'path';
 import misrutas from './router/index.js';
 
-const puerto = 3000;
+const puerto = 80;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
