@@ -23,4 +23,24 @@ router.post("/tabla", (req, res) => {
   res.render("tabla", params);
 })
 
+router.get('/cotizacion', (req, res) => {
+  // Parámetros
+  const params = {
+      valor: req.query.valor,
+      pinicial: req.body.pinicial,
+      plazos: req.query.plazos,
+  }
+  res.render('cotizacion', params);
+});
+
+router.post('/cotizacion', (req, res) => {
+  // Parámetros
+  const params = {
+      valor: req.body.valor,
+      pinicial: req.body.pinicial,
+      plazos: req.body.plazos,
+  }
+  res.render('cotizacion', params);
+});
+
 export default {router}

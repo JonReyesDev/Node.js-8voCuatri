@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <title>Cotización de Automóviles</title>
+    
+    </head>
+    <body>
+        <%- include('partials/header.ejs') %>
+        <%- include('partials/nav.ejs') %>
+
+        <section class="formulario-container" style="padding: 20px">
+            <div id="formulario" class="container">
+                <form action="/cotizacion" method="post">
+                    <div class="form-group">
+                        <label for="valor">Precio de automóvil</label>
+                        <input type="number" class="form-control" name="valor" id="valor" value="<%=valor%>" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="pinicial">Porcentaje de Pago Inicial</label>
+                        <input type="number" class="form-control" name="pinicial" id="pinicial" value="<%=pinicial%>" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="plazos">Plazos</label>
+                        <select class="form-control" name="plazos" id="plazos" value="<%=plazos%>">
+                            <option value="12">12 Meses</option>
+                            <option value="24">24 Meses</option>
+                            <option value="36">36 Meses</option>
+                            <option value="48">48 Meses</option>
+                            <option value="60">60 Meses</option>
+                        </select>
+                    </div>
+                    <div class="buttons" style="margin: 20px 0px;">
+                        <button type="submit" class="btn btn-primary">Calcular</button>
+                        <button type="reset" class="btn" style="background-color: #dddddd"><a href="/cotizacion">Limpiar</a></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="resultados-container">
+            <div class="container">
+                <h3>Resultados de la cotización</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (valor) { %>
+                        <%
+                        let pagoInicial = valor * (pinicial / 100);
+                        let totalValor = valor - pagoInicial;
+                        let mensualValor = (( valor - pagoInicial ) / plazos).toFixed(2);
+                        %>
+                        <tr>
+                            <td>Pago Inicial</td>
+                            <td>$<%=pagoInicial%></td>
+                        </tr>
+                        <tr>
+                            <td>Total a Financiar</td>
+                            <td>$<%=totalValor%></td>
+                        </tr>
+                        <tr>
+                            <td>Pago Mensual</td>
+                            <td>$<%=mensualValor%></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <%- include('partials/footer.ejs') %>
+    </body>
+</html>

@@ -9,7 +9,6 @@ const puerto = 80;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 // Declarar la variable punto de inicio
 
 const main = express();
