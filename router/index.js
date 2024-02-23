@@ -2,6 +2,7 @@ import express from 'express';
 import json  from 'body-parser';
 
 export const router = express.Router();
+export default {router};
 
 router.get('/',(req, res)=>{
     res.render('index',{titulo:"Mis Practicas",nombre:"Jonathan Alexis Reyes"})
@@ -42,5 +43,3 @@ router.post('/cotizacion', (req, res) => {
   }
   res.render('cotizacion', params);
 });
-
-export default {router}
