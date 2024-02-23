@@ -34,12 +34,12 @@ router.get('/cotizacion', (req, res) => {
   res.render('cotizacion', params);
 });
 
-router.post("/cotizacion", (req, res) => {
+router.post('/cotizacion', (req, res) => {
   // Parámetros
   const params = {
       valor: req.body.valor,
       pinicial: req.body.pinicial,
       plazos: req.body.plazos,
   }
-  res.render("cotizacion", params);
+  res.render('cotizacion', params);
 });
