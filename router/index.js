@@ -1,5 +1,6 @@
 import express from 'express';
 import json  from 'body-parser';
+import alumnnosDb from '../models/alumnos.js'; 
 
 export const router = express.Router();
 export default {router};
@@ -43,3 +44,35 @@ router.post('/cotizacion', (req, res) => {
   }
   res.render('cotizacion', params);
 });
+
+
+let rows;
+router.get('/alumnos', async(req, res) => {
+  rows = await alumnnosDb.mostrarTodos();
+  res.render('alumnos', {reg:rows});
+});
+
+
+let params;
+router.post('/alumnos',async (req, res) => {
+  // Parámetros
+  try{
+    params = {
+      matricula:req.body.matricula,
+      nombre:req.body.nombre,
+      domicilio:req.body.domicilio,
+      sexo:req.body.sexo,
+      especialidad:req.body.especialidad
+
+    }
+    const res = await alumnnosDb.insertar(params);
+
+  } catch(error){
+    console.error(error)
+    res.status(400).send("Ocurrio un error: " + error);
+  }
+
+  rows = await alumnnosDb.mostrarTodos();
+  res.render('alumnos', {reg:rows});
+});
+
