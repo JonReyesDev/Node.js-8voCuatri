@@ -49,7 +49,9 @@ router.post('/cotizacion', (req, res) => {
 let rows;
 router.get('/alumnos', async(req, res) => {
   rows = await alumnnosDb.mostrarTodos();
-  res.render('alumnos', {reg:rows});
+  res.render('alumnos', {
+    reg:rows,
+  });
 });
 
 
@@ -73,6 +75,8 @@ router.post('/alumnos',async (req, res) => {
   }
 
   rows = await alumnnosDb.mostrarTodos();
-  res.render('alumnos', {reg:rows});
+  res.render('alumnos', {
+    reg:rows,
+  });
 });
 
