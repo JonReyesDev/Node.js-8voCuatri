@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run server & npm run watch",
+    "server": "nodemon app.js",
+    "watch": "browser-sync start --proxy 'http://localhost' --files 'views/*'"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parse": "^0.1.0",
+    "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mysql2": "^3.9.2",
