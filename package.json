@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run server & npm run watch",
-    "server": "nodemon app.js",
+    "server": "nodemon app2.js",
     "watch": "browser-sync start --proxy 'http://localhost' --files 'views/*'"
   },
   "keywords": [],
