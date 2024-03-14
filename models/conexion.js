@@ -1,21 +1,29 @@
-import mysql from 'mysql2'
+import mysql from 'mysql2';
 
-var conexion = mysql.createConnection({
-    host:"127.0.0.1",
-    user:"root",
-    password:"john1093",
-    database:"sistemas"
-});
+let connection;
 
-conexion.connect(function(err){
+function createConnection() {
+    connection = mysql.createConnection({
+        host: "127.0.0.1",
+        user: "root",
+        password: "john1093",
+        database: "sistemas"
+    });
 
-    if(err){
-        console.log("surgio un error: "+ err);
+    connection.connect(function(err) {
+        if (err) {
+            console.log(`Surgió un error: ${err}`);
+        } else {
+            console.log("Se abrió la conexión con éxito.");
+        }
+    });
+    return connection;
+}
+
+export function getConnection() {
+    if (!connection) {
+        return createConnection();
     }
-    else{
-        console.log("Se abrio la conexion con exito");
-    }
-})
-
-export default conexion;
+    return connection;
+}
 
