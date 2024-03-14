@@ -1,36 +1,44 @@
-import { getConnection } from "./conexion.js";
+import { resolve } from "path";
+import conexion from "./conexion.js";
+import { rejects } from "assert";
 
-var alumnnosDb = {}
-alumnnosDb.insertar = function insertar(alumno){
-    return new Promise((resolver, rejects)=>{
-        //consulta
+var alumnosDb = {}
+alumnosDb.insertar = function insertar(alumno){
+
+    return new Promise((resolve,rejects)=>{
+        // Consulta
         let sqlConsulta = "Insert into alumnos set ?";
-        getConnection().query(sql_consulta, alumno, function(err, res) {
+        conexion.query(sqlConsulta,alumno,function(err,res){
+
         
-        const alumno = {
-            id:res.id,
+
+        if(err){
+            console.log("Surgio un error en la conexion", err.message);
+            rejects(err);
         }
-    
-        resolver(alumno);
-
+        else{
+            const alumno = {
+                id:res.id,
+            }
+            resolve(alumno);
+        }
         });
     });
 }
 
-alumnnosDb.mostrarTodos = function mmostrarTodos(){
-    return new Promise((resolve, rejects)=>{
-        let sqlConsulta = "select * from alumnos"
-        getConnection().query(sql_consulta, null, function(err, res) {
-            if(err){
-                console.log("Surgio un error ", err);
-                rejects(err);
-            }
-
-            else{
-                resolve(res);
-            }
-        });
-    });
+alumnosDb.mostrarTodos = function mostrarTodos(){
+   return new Promise((resolve,rejects)=>{
+    let sqlConsulta = "select * from alumnos"
+    conexion.query(sqlConsulta,null,function(err,res){
+        if (err){
+            console.log("Surgio un error", err);
+            rejects(err);
+        }
+        else{
+            resolve(res);
+        }
+    })
+   })
 }
 
-export default alumnnosDb;
+export default alumnosDb;
